@@ -1,7 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqri7s6srmqlr"]
+[gd_scene load_steps=6 format=3 uid="uid://cqri7s6srmqlr"]
 
-[ext_resource type="Texture2D" uid="uid://cm7tlkvgtl38j" path="res://Textures/Field_00.png" id="1_8juqs"]
+[ext_resource type="Texture2D" uid="uid://cm7tlkvgtl38j" path="res://Textures/Placeholder/Field_00.png" id="1_8juqs"]
+[ext_resource type="Script" uid="uid://c26f3niw1vflt" path="res://Scripts/paddle.gd" id="2_bbyqf"]
+[ext_resource type="Texture2D" uid="uid://bn0tc1tp7n845" path="res://Textures/Placeholder/Paddle.png" id="3_s1lr2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8juqs"]
+size = Vector2(4, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbyqf"]
+size = Vector2(480, 8)
 
 [node name="Field" type="Sprite2D"]
-position = Vector2(240, 135)
 texture = ExtResource("1_8juqs")
+centered = false
+
+[node name="Paddle" type="CharacterBody2D" parent="."]
+position = Vector2(75, 135)
+script = ExtResource("2_bbyqf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Paddle"]
+texture = ExtResource("3_s1lr2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
+shape = SubResource("RectangleShape2D_8juqs")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D_1" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(240, 4)
+shape = SubResource("RectangleShape2D_bbyqf")
+
+[node name="CollisionShape2D_2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(240, 266)
+shape = SubResource("RectangleShape2D_bbyqf")
