@@ -1,35 +1,103 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqri7s6srmqlr"]
+[gd_scene load_steps=9 format=3 uid="uid://cqri7s6srmqlr"]
 
 [ext_resource type="Texture2D" uid="uid://cm7tlkvgtl38j" path="res://Textures/Placeholder/Field_00.png" id="1_8juqs"]
-[ext_resource type="Script" uid="uid://c26f3niw1vflt" path="res://Scripts/paddle.gd" id="2_bbyqf"]
-[ext_resource type="Texture2D" uid="uid://bn0tc1tp7n845" path="res://Textures/Placeholder/Paddle.png" id="3_s1lr2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8juqs"]
-size = Vector2(4, 32)
+[ext_resource type="Script" uid="uid://clwlyvv8mhjum" path="res://Scripts/main.gd" id="2_s1lr2"]
+[ext_resource type="PackedScene" uid="uid://yk8wdkc4ftk7" path="res://Scenes/paddle.tscn" id="3_fir65"]
+[ext_resource type="Script" uid="uid://8s3kugd1vlo1" path="res://Scripts/ball.gd" id="4_fir65"]
+[ext_resource type="FontFile" uid="uid://bkwpyydsxxqbd" path="res://Textures/Font/PublicPixel.otf" id="4_s1lr2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbyqf"]
 size = Vector2(480, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1lr2"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fir65"]
+size = Vector2(28, 254)
+
 [node name="Field" type="Sprite2D"]
 texture = ExtResource("1_8juqs")
 centered = false
+script = ExtResource("2_s1lr2")
 
-[node name="Paddle" type="CharacterBody2D" parent="."]
-position = Vector2(75, 135)
-script = ExtResource("2_bbyqf")
+[node name="Paddle1" parent="." instance=ExtResource("3_fir65")]
+position = Vector2(45, 135)
+max_speed = 200.0
+accel = 20.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Paddle"]
-texture = ExtResource("3_s1lr2")
+[node name="Paddle2" parent="." instance=ExtResource("3_fir65")]
+position = Vector2(435, 135)
+player_id = 1
+max_speed = 200.0
+accel = 20.0
+is_cpu = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
-shape = SubResource("RectangleShape2D_8juqs")
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_mask = 0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D_1" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D_1" type="CollisionShape2D" parent="Walls"]
 position = Vector2(240, 4)
 shape = SubResource("RectangleShape2D_bbyqf")
 
-[node name="CollisionShape2D_2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D_2" type="CollisionShape2D" parent="Walls"]
 position = Vector2(240, 266)
 shape = SubResource("RectangleShape2D_bbyqf")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(240, 135)
+collision_layer = 4
+collision_mask = 11
+motion_mode = 1
+script = ExtResource("4_fir65")
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_s1lr2")
+
+[node name="ScoreLeft" type="Area2D" parent="."]
+position = Vector2(0, 135)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreLeft"]
+position = Vector2(-10, 0)
+shape = SubResource("RectangleShape2D_fir65")
+
+[node name="ScoreRight" type="Area2D" parent="."]
+position = Vector2(490, 135)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreRight"]
+shape = SubResource("RectangleShape2D_fir65")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreP1" type="Label" parent="UI"]
+offset_left = 203.0
+offset_top = 6.0
+offset_right = 235.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("4_s1lr2")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ScoreP2" type="Label" parent="UI"]
+offset_left = 246.0
+offset_top = 6.0
+offset_right = 278.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("4_s1lr2")
+text = "0"
+vertical_alignment = 1
+
+[connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left"]
+[connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right"]
