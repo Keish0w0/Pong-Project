@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var player_id: int
 
@@ -12,6 +13,7 @@ extends CharacterBody2D
 var ball_pos: Vector2 
 var distance: float
 
+@onready var height: float = $CollisionShape2D.shape.get_rect().size.x 
 var input: int
 
 func get_input():
@@ -30,6 +32,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y = lerp(velocity.y, input * max_speed, lerp_weight)
 	else:
 		if abs(distance) > max_speed * delta:
-			velocity.y = lerp(velocity.y, sign(distance) * (max_speed - (max_speed * 0.2)), accel * delta)
-	
+			velocity.y = lerp(velocity.y, sign(distance) * (max_speed * 0.95), accel * delta)
+		else:
+			velocity.y = distance
+	velocity.x = 0
 	move_and_slide()

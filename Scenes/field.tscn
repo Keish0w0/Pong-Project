@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cm7tlkvgtl38j" path="res://Textures/Placeholder/Field_00.png" id="1_8juqs"]
 [ext_resource type="Script" uid="uid://clwlyvv8mhjum" path="res://Scripts/main.gd" id="2_s1lr2"]
-[ext_resource type="PackedScene" uid="uid://yk8wdkc4ftk7" path="res://Scenes/paddle.tscn" id="3_fir65"]
+[ext_resource type="PackedScene" uid="uid://yk8wdkc4ftk7" path="res://Scenes/player.tscn" id="3_fir65"]
 [ext_resource type="Script" uid="uid://8s3kugd1vlo1" path="res://Scripts/ball.gd" id="4_fir65"]
 [ext_resource type="FontFile" uid="uid://bkwpyydsxxqbd" path="res://Textures/Font/PublicPixel.otf" id="4_s1lr2"]
 
@@ -20,12 +20,12 @@ texture = ExtResource("1_8juqs")
 centered = false
 script = ExtResource("2_s1lr2")
 
-[node name="Paddle1" parent="." instance=ExtResource("3_fir65")]
+[node name="Player1" parent="." instance=ExtResource("3_fir65")]
 position = Vector2(45, 135)
 max_speed = 200.0
 accel = 20.0
 
-[node name="Paddle2" parent="." instance=ExtResource("3_fir65")]
+[node name="Player2" parent="." instance=ExtResource("3_fir65")]
 position = Vector2(435, 135)
 player_id = 1
 max_speed = 200.0
