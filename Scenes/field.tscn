@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqri7s6srmqlr"]
+[gd_scene load_steps=10 format=3 uid="uid://cqri7s6srmqlr"]
 
 [ext_resource type="Texture2D" uid="uid://cm7tlkvgtl38j" path="res://Textures/Placeholder/Field_00.png" id="1_8juqs"]
 [ext_resource type="Script" uid="uid://clwlyvv8mhjum" path="res://Scripts/main.gd" id="2_s1lr2"]
 [ext_resource type="PackedScene" uid="uid://yk8wdkc4ftk7" path="res://Scenes/player.tscn" id="3_fir65"]
 [ext_resource type="Script" uid="uid://8s3kugd1vlo1" path="res://Scripts/ball.gd" id="4_fir65"]
 [ext_resource type="FontFile" uid="uid://bkwpyydsxxqbd" path="res://Textures/Font/PublicPixel.otf" id="4_s1lr2"]
+[ext_resource type="PackedScene" uid="uid://bnix23qv7ujm" path="res://Scenes/pause_menu.tscn" id="6_fxj5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbyqf"]
 size = Vector2(480, 8)
@@ -98,6 +99,9 @@ offset_bottom = 29.0
 theme_override_fonts/font = ExtResource("4_s1lr2")
 text = "0"
 vertical_alignment = 1
+
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("main") instance=ExtResource("6_fxj5q")]
+main = NodePath("../..")
 
 [connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left"]
 [connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right"]
