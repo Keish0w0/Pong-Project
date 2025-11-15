@@ -13,7 +13,10 @@ config_version=5
 config/name="Pong"
 run/main_scene="uid://fqxgpkjjorit"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="uid://d26ecmmerms4w"
+config/macos_native_icon="uid://d26ecmmerms4w"
+config/windows_native_icon="uid://d26ecmmerms4w"
 
 [autoload]
 
