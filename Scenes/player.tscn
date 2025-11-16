@@ -1,48 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://yk8wdkc4ftk7"]
+[gd_scene load_steps=4 format=3 uid="uid://yk8wdkc4ftk7"]
 
 [ext_resource type="Script" uid="uid://c26f3niw1vflt" path="res://Scripts/player.gd" id="1_krcey"]
-[ext_resource type="Texture2D" uid="uid://ciwxcv088x8xv" path="res://Textures/Placeholder/Characters/Bridget_Idle-Sheet.png" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://bn0tc1tp7n845" path="res://Textures/Placeholder/Paddle.png" id="2_cvnsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8juqs"]
-size = Vector2(50, 125)
-
-[sub_resource type="Animation" id="Animation_cvnsp"]
-resource_name = "idle"
-length = 0.7000034
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-
-[sub_resource type="Animation" id="Animation_6t5aa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgqql"]
-_data = {
-&"RESET": SubResource("Animation_6t5aa"),
-&"idle": SubResource("Animation_cvnsp")
-}
+size = Vector2(4, 32)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -52,13 +14,6 @@ max_speed = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_cvnsp")
-hframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8juqs")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_vgqql")
-}
-autoplay = "idle"
